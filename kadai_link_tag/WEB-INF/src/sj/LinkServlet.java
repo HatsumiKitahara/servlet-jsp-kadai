@@ -1,8 +1,8 @@
 package sj;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +32,15 @@ public class LinkServlet extends HttpServlet {
 
         // JSPからのリクエストデータ取得
         String name = request.getParameter("name");
-     // メッセージ生成
-        String message = name + "さん、こんにちは！";
+        // メッセージ生成
+        String message = "Servletからデータを受信しました：" + name + "さん、こんにちは！";
 
-        // レスポンスのコンテンツタイプ設定
-        response.setContentType("text/html; charset=UTF-8");
+     // リクエストスコープに保存
+        request.setAttribute("message", message);
 
-        // 取得したデータの表示
-        PrintWriter out = response.getWriter();
-        out.println("Servletからデータを受信しました：" + message );
+        // JSP（index.jsp）へフォワード
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
+    
     }
 }

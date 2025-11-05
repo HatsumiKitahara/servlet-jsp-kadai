@@ -9,6 +9,12 @@
         
         <a href="<%= request.getContextPath() %>/LinkServlet?name=侍太郎">名前「侍太郎」をServretに送信</a>
 		
-        </form>
+        <hr>
+
+ 	   <%-- Servletからフォワードされてきたmessageを表示 --%>
+	    <c:if test="${not empty message}">
+	        <p><strong>${message}</strong></p>
+	    </c:if>
+    
     </body>
 </html>
